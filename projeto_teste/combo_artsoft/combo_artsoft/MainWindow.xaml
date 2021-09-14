@@ -1,0 +1,24 @@
+﻿<Window x:Class="combo_artsoft.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:combo_artsoft"
+        mc:Ignorable="d"
+        Title="ComboArtsoft" Height="500" Width="525"
+        WindowState="Normal"
+        ResizeMode="CanResize" 
+        WindowStartupLocation="CenterScreen" FontSize="16">
+    <Window.Background>
+        <ImageBrush ImageSource="/imagens/logo_artsoft.jpg" />
+    </Window.Background>
+
+    <Grid RenderTransformOrigin="0.493,0.56" >
+        <Button x:Name="sair" Content="Sair (Logoff)" HorizontalAlignment="Center" Margin="0,399,0,0" VerticalAlignment="Top" Width="122" Click="butaoLogoff" FontWeight="Bold" FontStyle="Normal" FontSize="18" FontStretch="Medium" RenderTransformOrigin="0.469,-0.027" Height="38"/>
+        <Button x:Name="SAPB1" Content="SAPB1" HorizontalAlignment="Center" Margin="0,64,0,0" VerticalAlignment="Top" Width="122" Click="botaoSap" FontWeight="Bold" FontStyle="Normal" FontSize="18" FontStretch="Medium" RenderTransformOrigin="0.469,-0.027" Height="38"/>
+        <Button x:Name="Notepad" Content="Notepad" HorizontalAlignment="Center" Margin="0,107,0,0" VerticalAlignment="Top" Width="122" Click="butaoNotepad" FontWeight="Bold" FontStyle="Normal" FontSize="18" FontStretch="Medium" RenderTransformOrigin="0.469,-0.027" Height="38"/>
+        <Button x:Name="paint" Content="Paint" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Width="122" Click="butaoPaint" FontWeight="Bold" FontStyle="Normal" FontSize="18" FontStretch="Medium" RenderTransformOrigin="0.469,-0.027" Height="38"/>
+
+
+    </Grid>
+</Window>

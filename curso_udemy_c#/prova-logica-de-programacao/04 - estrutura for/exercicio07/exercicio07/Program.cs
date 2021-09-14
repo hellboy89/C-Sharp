@@ -1,0 +1,22 @@
+﻿using System;
+
+namespace exercicio07
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int valor = int.Parse(Console.ReadLine());
+
+            for (int i = 1; i <= valor; i++)
+            {
+                int primeiro = i;
+                int segundo = i * i;
+                int terceiro = i * i * i;
+                Console.WriteLine($"{primeiro} {segundo} {terceiro}");
+            }
+
+
+        }
+    }
+}
