@@ -39,6 +39,7 @@ namespace _teste_Case1 {
 
                 Console.WriteLine("O dia é " + dia);
                 Console.WriteLine("Teste HelloWorld");
+                Console.WriteLine("utilizando o git push");
 
             }
 
