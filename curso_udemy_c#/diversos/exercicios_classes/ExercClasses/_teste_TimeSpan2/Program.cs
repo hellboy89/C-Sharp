@@ -51,7 +51,8 @@ namespace _teste_TimeSpan2 {
 
             Console.WriteLine();
             Console.WriteLine("Hello World!");
-
+            Console.WriteLine("Teste com git");
+            Console.WriteLine("Fazendo alterações depois do git reset soft head 1");
         }
     }
 }
