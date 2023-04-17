@@ -31,9 +31,12 @@
             comboBox_listaBases = new ComboBox();
             statusStrip_dados = new StatusStrip();
             toolStripStatusLabel_dados = new ToolStripStatusLabel();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
             treeView_diretorios = new TreeView();
             button1 = new Button();
-            button2 = new Button();
+            textBox_linkGdrive = new TextBox();
+            button_download2 = new Button();
+            button_copiarLink = new Button();
             statusStrip_dados.SuspendLayout();
             SuspendLayout();
             // 
@@ -49,16 +52,22 @@
             // statusStrip_dados
             // 
             statusStrip_dados.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            statusStrip_dados.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel_dados });
-            statusStrip_dados.Location = new Point(0, 420);
+            statusStrip_dados.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel_dados, toolStripStatusLabel1 });
+            statusStrip_dados.Location = new Point(0, 417);
             statusStrip_dados.Name = "statusStrip_dados";
-            statusStrip_dados.Size = new Size(782, 22);
+            statusStrip_dados.Size = new Size(782, 25);
             statusStrip_dados.TabIndex = 1;
             // 
             // toolStripStatusLabel_dados
             // 
             toolStripStatusLabel_dados.Name = "toolStripStatusLabel_dados";
-            toolStripStatusLabel_dados.Size = new Size(0, 17);
+            toolStripStatusLabel_dados.Size = new Size(0, 20);
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(160, 20);
+            toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // treeView_diretorios
             // 
@@ -79,22 +88,43 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // button2
+            // textBox_linkGdrive
             // 
-            button2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(94, 341);
-            button2.Name = "button2";
-            button2.Size = new Size(179, 32);
-            button2.TabIndex = 8;
-            button2.Text = "Download";
-            button2.UseVisualStyleBackColor = true;
+            textBox_linkGdrive.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            textBox_linkGdrive.Location = new Point(245, 348);
+            textBox_linkGdrive.Name = "textBox_linkGdrive";
+            textBox_linkGdrive.ReadOnly = true;
+            textBox_linkGdrive.Size = new Size(301, 25);
+            textBox_linkGdrive.TabIndex = 9;
+            // 
+            // button_download2
+            // 
+            button_download2.Location = new Point(94, 348);
+            button_download2.Name = "button_download2";
+            button_download2.Size = new Size(128, 23);
+            button_download2.TabIndex = 10;
+            button_download2.Text = "Download";
+            button_download2.UseVisualStyleBackColor = true;
+            button_download2.Click += button_download2_Click;
+            // 
+            // button_copiarLink
+            // 
+            button_copiarLink.Location = new Point(552, 348);
+            button_copiarLink.Name = "button_copiarLink";
+            button_copiarLink.Size = new Size(100, 23);
+            button_copiarLink.TabIndex = 11;
+            button_copiarLink.Text = "Copiar";
+            button_copiarLink.UseVisualStyleBackColor = true;
+            button_copiarLink.Click += button_copiarLink_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(782, 442);
-            Controls.Add(button2);
+            Controls.Add(button_copiarLink);
+            Controls.Add(button_download2);
+            Controls.Add(textBox_linkGdrive);
             Controls.Add(button1);
             Controls.Add(treeView_diretorios);
             Controls.Add(statusStrip_dados);
@@ -115,6 +145,10 @@
         private ToolStripStatusLabel toolStripStatusLabel_dados;
         private TreeView treeView_diretorios;
         private Button button1;
-        private Button button2;
+        private Button button_download;
+        private TextBox textBox_linkGdrive;
+        private Button button_download2;
+        private Button button_copiarLink;
+        private ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
