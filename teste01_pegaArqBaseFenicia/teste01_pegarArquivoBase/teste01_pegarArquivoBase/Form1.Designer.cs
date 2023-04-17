@@ -31,11 +31,9 @@
             comboBox_listaBases = new ComboBox();
             statusStrip_dados = new StatusStrip();
             toolStripStatusLabel_dados = new ToolStripStatusLabel();
-            listBox_listarDiretorio = new ListBox();
-            button_voltar = new Button();
-            button_mostraGlobal = new Button();
-            button_fileDialog = new Button();
-            openFileDialog1 = new OpenFileDialog();
+            treeView_diretorios = new TreeView();
+            button1 = new Button();
+            button2 = new Button();
             statusStrip_dados.SuspendLayout();
             SuspendLayout();
             // 
@@ -43,11 +41,10 @@
             // 
             comboBox_listaBases.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox_listaBases.FormattingEnabled = true;
-            comboBox_listaBases.Location = new Point(110, 41);
+            comboBox_listaBases.Location = new Point(94, 29);
             comboBox_listaBases.Name = "comboBox_listaBases";
-            comboBox_listaBases.Size = new Size(279, 28);
+            comboBox_listaBases.Size = new Size(251, 28);
             comboBox_listaBases.TabIndex = 0;
-            comboBox_listaBases.SelectedValueChanged += comboBox_listaBases_SelectedValueChanged;
             // 
             // statusStrip_dados
             // 
@@ -63,61 +60,43 @@
             toolStripStatusLabel_dados.Name = "toolStripStatusLabel_dados";
             toolStripStatusLabel_dados.Size = new Size(0, 17);
             // 
-            // listBox_listarDiretorio
+            // treeView_diretorios
             // 
-            listBox_listarDiretorio.FormattingEnabled = true;
-            listBox_listarDiretorio.ItemHeight = 15;
-            listBox_listarDiretorio.Location = new Point(110, 88);
-            listBox_listarDiretorio.Name = "listBox_listarDiretorio";
-            listBox_listarDiretorio.Size = new Size(279, 244);
-            listBox_listarDiretorio.TabIndex = 2;
-            listBox_listarDiretorio.DoubleClick += listBox_listarDiretorio_DoubleClick;
+            treeView_diretorios.Location = new Point(94, 80);
+            treeView_diretorios.Name = "treeView_diretorios";
+            treeView_diretorios.Size = new Size(352, 244);
+            treeView_diretorios.TabIndex = 6;
+            treeView_diretorios.DoubleClick += treeView_diretorios_DoubleClick;
             // 
-            // button_voltar
+            // button1
             // 
-            button_voltar.Location = new Point(406, 88);
-            button_voltar.Name = "button_voltar";
-            button_voltar.Size = new Size(75, 23);
-            button_voltar.TabIndex = 3;
-            button_voltar.Text = "VOLTAR";
-            button_voltar.UseVisualStyleBackColor = true;
-            button_voltar.Click += button_voltar_Click;
+            button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.Location = new Point(371, 29);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 28);
+            button1.TabIndex = 7;
+            button1.Text = "Listar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
-            // button_mostraGlobal
+            // button2
             // 
-            button_mostraGlobal.Location = new Point(12, 382);
-            button_mostraGlobal.Name = "button_mostraGlobal";
-            button_mostraGlobal.Size = new Size(152, 23);
-            button_mostraGlobal.TabIndex = 4;
-            button_mostraGlobal.Text = "MOSTRAR GLOBAL";
-            button_mostraGlobal.UseVisualStyleBackColor = true;
-            button_mostraGlobal.Click += button_mostraGlobal_Click;
-            // 
-            // button_fileDialog
-            // 
-            button_fileDialog.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button_fileDialog.Location = new Point(474, 202);
-            button_fileDialog.Name = "button_fileDialog";
-            button_fileDialog.Size = new Size(157, 47);
-            button_fileDialog.TabIndex = 5;
-            button_fileDialog.Text = "Abrir Pastas";
-            button_fileDialog.UseVisualStyleBackColor = true;
-            button_fileDialog.Click += button_fileDialog_Click;
-            // 
-            // openFileDialog1
-            // 
-            openFileDialog1.FileName = "openFileDialog1";
-            openFileDialog1.FileOk += openFileDialog1_FileOk;
+            button2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            button2.Location = new Point(94, 341);
+            button2.Name = "button2";
+            button2.Size = new Size(179, 32);
+            button2.TabIndex = 8;
+            button2.Text = "Download";
+            button2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(782, 442);
-            Controls.Add(button_fileDialog);
-            Controls.Add(button_mostraGlobal);
-            Controls.Add(button_voltar);
-            Controls.Add(listBox_listarDiretorio);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(treeView_diretorios);
             Controls.Add(statusStrip_dados);
             Controls.Add(comboBox_listaBases);
             Margin = new Padding(3, 2, 3, 2);
@@ -134,10 +113,8 @@
         private ComboBox comboBox_listaBases;
         private StatusStrip statusStrip_dados;
         private ToolStripStatusLabel toolStripStatusLabel_dados;
-        private ListBox listBox_listarDiretorio;
-        private Button button_voltar;
-        private Button button_mostraGlobal;
-        private Button button_fileDialog;
-        private OpenFileDialog openFileDialog1;
+        private TreeView treeView_diretorios;
+        private Button button1;
+        private Button button2;
     }
 }

@@ -1,4 +1,8 @@
 using System.Runtime;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.IO;
+using System.Windows.Forms;
 
 namespace teste01_pegarArquivoBase
 {
@@ -17,131 +21,57 @@ namespace teste01_pegarArquivoBase
             {
                 comboBox_listaBases.Items.Add(listar);
             }
-        }
 
-        private void comboBox_listaBases_SelectedValueChanged(object sender, EventArgs e)
-        {
-            string baseSelecionada = comboBox_listaBases.SelectedItem.ToString();
-
-            listaDiretoriosAcessados.Add(baseSelecionada + @"\");
-
-            toolStripStatusLabel_dados.Text = baseSelecionada;
-
-            string[] diretorios = Directory.GetDirectories(baseSelecionada, "*", SearchOption.TopDirectoryOnly);
-            string[] arquivos = Directory.GetFiles(baseSelecionada, "*", SearchOption.TopDirectoryOnly);
-
-            listBox_listarDiretorio.Items.Clear();
-
-            foreach (string listar in diretorios)
-            {
-                string[] ultimoNome = listar.Split('\\');
-
-                listBox_listarDiretorio.Items.Add(ultimoNome[ultimoNome.Length - 1]);
-            }
-
-            foreach (string listar in arquivos)
-            {
-                listBox_listarDiretorio.Items.Add(Path.GetFileName(listar));
-            }
-        }
-
-
-        private void listBox_listarDiretorio_DoubleClick(object sender, EventArgs e)
-        {
-            string caminhoRaiz = listaDiretoriosAcessados[listaDiretoriosAcessados.Count - 1];
-
-            string selecao = listBox_listarDiretorio.SelectedItem.ToString();
-
-            string valorSelecionado = caminhoRaiz + @"\" + selecao;
-
-            toolStripStatusLabel_dados.Text = valorSelecionado;
-
-            // Condicional abaixo serve para filtrar não gerar erro caso clique 2 vezes em um arquivo, pois não é um diretório.
-
-            if (Path.GetExtension(valorSelecionado) == string.Empty)
-            {
-
-                string[] diretorios = Directory.GetDirectories(valorSelecionado, "*", SearchOption.TopDirectoryOnly);
-                string[] arquivos = Directory.GetFiles(valorSelecionado, "*", SearchOption.TopDirectoryOnly);
-
-                listaDiretoriosAcessados.Add(valorSelecionado);
-
-                listBox_listarDiretorio.Items.Clear();
-
-                foreach (string listar in diretorios)
-                {
-                    string[] ultimoNome = listar.Split('\\');
-
-                    listBox_listarDiretorio.Items.Add(ultimoNome[ultimoNome.Length - 1]);
-                }
-
-                foreach (string listar in arquivos)
-                {
-                    listBox_listarDiretorio.Items.Add(Path.GetFileName(listar));
-                }
-
-                toolStripStatusLabel_dados.Text = valorSelecionado;
-            }
-            else
-            {
-                string diretorio = listaDiretoriosAcessados[listaDiretoriosAcessados.Count - 1];
-
-                toolStripStatusLabel_dados.Text = valorSelecionado;
-            }
-        }
-
-
-        private void button_voltar_Click(object sender, EventArgs e)
-        {
-
-            string valorSelecionado = listaDiretoriosAcessados[listaDiretoriosAcessados.Count - 2];
-
-            string[] diretorios = Directory.GetDirectories(valorSelecionado, "*", SearchOption.TopDirectoryOnly);
-            string[] arquivos = Directory.GetFiles(valorSelecionado, "*", SearchOption.TopDirectoryOnly);
-
-            listaDiretoriosAcessados.Add(valorSelecionado);
-
-            listBox_listarDiretorio.Items.Clear();
-
-            foreach (string listar in diretorios)
-            {
-                string[] ultimoNome = listar.Split('\\');
-
-                listBox_listarDiretorio.Items.Add(ultimoNome[ultimoNome.Length - 1]);
-            }
-
-            foreach (string listar in arquivos)
-            {
-                listBox_listarDiretorio.Items.Add(Path.GetFileName(listar));
-            }
-
-            toolStripStatusLabel_dados.Text = valorSelecionado;
 
         }
 
-        private void button_mostraGlobal_Click(object sender, EventArgs e)
+        private void FillTree(TreeNode node, string path)
         {
-            Console.WriteLine("Mostrando valor para test");
+            // Cria um objeto DirectoryInfo para o diretório atual
+            DirectoryInfo directory = new DirectoryInfo(path);
+
+            // Adiciona um nó para cada subdiretório
+            foreach (DirectoryInfo subDirectory in directory.GetDirectories())
+            {
+                TreeNode subNode = new TreeNode(subDirectory.Name);
+
+                // Adiciona o nó filho ao nó atual
+                node.Nodes.Add(subNode);
+
+                // Chama o método recursivo para preencher os subdiretórios deste subdiretório
+                FillTree(subNode, subDirectory.FullName);
+            }
+
+            // Adiciona um nó para cada arquivo
+            foreach (FileInfo file in directory.GetFiles())
+            {
+                TreeNode fileNode = new TreeNode(file.Name);
+
+                // Adiciona o nó filho ao nó atual
+                node.Nodes.Add(fileNode);
+            }
         }
 
-        private void button_fileDialog_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            string diretorio = comboBox_listaBases.Text.ToString();
 
-            openFileDialog1.Title = "Selecione um arquivo";
+            treeView_diretorios.Nodes.Clear();
 
-            openFileDialog1.Filter = "Arquivo de texto (*.txt)|*.txt|Todos os arquivos (*.*)|*.*";
+            TreeNode rootNode = new TreeNode(diretorio);
 
-            openFileDialog1.InitialDirectory = @"D:\";
+            treeView_diretorios.Nodes.Add(rootNode);
 
-            toolStripStatusLabel_dados.Text = openFileDialog1.FileName;
+            FillTree(rootNode, diretorio);
         }
 
-        private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        private void treeView_diretorios_DoubleClick(object sender, EventArgs e)
         {
-            return;
+            string arquivoSelecionado = treeView_diretorios.SelectedNode.ToString();
+
+            toolStripStatusLabel_dados.Text = arquivoSelecionado;
+
         }
     }
+
 }
-
-

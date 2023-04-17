@@ -1,83 +1,42 @@
-﻿// See https://aka.ms/new-console-template for more information
-/*
-string[] nome = new string[4];
+﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
-nome[0] = "Juan";
-nome[1] = "Cleber";
-nome[2] = "Faria";
-nome[3] = "Alves";
-
-// string diretorios = @"D:\";
-string[] arquivos = Directory.GetDirectories(@"D:\");
-
-int teste2 = 10;
-double teste3 = 10.3;
-
-Console.WriteLine(teste3.GetType());
-Console.WriteLine(teste2);
-
-
-// string[] diretorios = Directory.GetDirectories("D:\\", "*", SearchOption.TopDirectoryOnly);
-
-using System.Collections.Generic;
-
-string[] diretorios = Directory.GetDirectories("D:\\", "*", SearchOption.TopDirectoryOnly).Where(d => !d.StartsWith("D:\\FTP") && !d.StartsWith("D:\\Unimake_") && !d.StartsWith("D:\\_Instaladores") && !d.StartsWith("D:\\System") && !d.StartsWith("D:\\$R") && !d.StartsWith("D:\\Sua_")).ToArray();
-
-string[] diretorios2 = Directory.GetFiles("D:\\IMPERIO", "*", SearchOption.TopDirectoryOnly);
-
-foreach (string listar in diretorios2)
+public Form1()
 {
-    Console.WriteLine(listar);
+    InitializeComponent();
+
+    DirectoryInfo directoryInfo = new DirectoryInfo(@"C:\Users\hikuma\Documents\IR");
+    if (directoryInfo.Exists)
+    {
+        treeView1.AfterSelect += treeView1_AfterSelect;
+        BuildTree(directoryInfo, treeView1.Nodes);
+    }
 }
 
-
-using System.Xml.Serialization;
-
-string caminho = @"D:\Fenicia\profile_users\kv1\nfe\V2\EnvioLote\teste.txt";
-
-string[] soArquivo = caminho.Split('\\');
-
-Console.WriteLine(soArquivo[soArquivo.Length -1]);
-
-using System.Collections.Generic;
-
-List<int> teste = new List<int>();
-
-teste.Add(10);
-teste.Add(20);
-teste.Add(30);
-
-int ultimo = teste[teste.Count - 1];
-
-Console.WriteLine(ultimo);
-
-
-string[] arquivos = Directory.GetDirectories(@"D:\Fenicia\\profile_users", "*", SearchOption.TopDirectoryOnly);
-
-foreach (string listar in arquivos)
+private void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
 {
-    Console.WriteLine(listar);
+    TreeNode curNode = addInMe.Add(directoryInfo.Name);
+
+    foreach (FileInfo file in directoryInfo.GetFiles())
+    {
+        curNode.Nodes.Add(file.FullName, file.Name);
+    }
+    foreach (DirectoryInfo subdir in directoryInfo.GetDirectories())
+    {
+        BuildTree(subdir, curNode.Nodes);
+    }
 }
 
-int contador = -10;
-
-contador--;
-
-Console.WriteLine(contador);
-
- */
-
-int val1 = 5;
-int val2 = 2;
-
-int soma = val1 + val2;
-
-if (soma > 10)
+private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
 {
-    Console.WriteLine("valor da soma e maior que 10");
+    if (e.Node.Name.EndsWith("txt"))
+    {
+        this.richTextBox1.Clear();
+        StreamReader reader = new StreamReader(e.Node.Name);
+        this.richTextBox1.Text = reader.ReadToEnd();
+        reader.Close();
+    }
 }
-else
-{
-    Console.WriteLine("valor da soma é menor do que 10");
-}
-
