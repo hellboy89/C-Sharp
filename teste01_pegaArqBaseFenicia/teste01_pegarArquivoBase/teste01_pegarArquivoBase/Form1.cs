@@ -25,7 +25,7 @@ namespace teste01_pegarArquivoBase
                 comboBox_listaBases.Items.Add(listar);
             }
 
-            toolStripStatusLabel1.Text = "TESTE";
+            toolStripStatusLabel1.Text = "";
         }
 
         private void FillTree(TreeNode node, string path)
@@ -69,7 +69,7 @@ namespace teste01_pegarArquivoBase
         }
 
         public string fullPath;
-        
+
         public void pegaArquivoListTree()
         {
             if (treeView_diretorios.SelectedNode != null)
@@ -91,8 +91,6 @@ namespace teste01_pegarArquivoBase
                 // Cria uma string com o caminho completo do arquivo
                 fullPath = Path.Combine(comboBox_listaBases.Text.ToString(), Path.Combine(nodes.ToArray()));
 
-                // Exibe o caminho completo na barra de status
-                // toolStripStatusLabel_dados.Text = fullPath;
             }
         }
 
@@ -100,6 +98,7 @@ namespace teste01_pegarArquivoBase
         {
             pegaArquivoListTree();
 
+            toolStripStatusLabel1.Text = fullPath;
         }
 
         //private void button_download(object sender, EventArgs e)
@@ -158,14 +157,12 @@ namespace teste01_pegarArquivoBase
 
         private void button_download2_Click(object sender, EventArgs e)
         {
+
             pegaArquivoListTree();
 
-            toolStripStatusLabel1.Text = String.Format("Fazendo UPLOAD do arquivo {0}, AGUARDE!...", nomeDoArquivo);
-
-
             string directory = "gdrive_tempUpload:";
-            string caminhoPasta = fullPath;
-            string command = $"C:\\script\\rclone-v1.58.1-windows-amd64\\rclone.exe copy {caminhoPasta} {directory}";
+            string caminhoArquivo = fullPath.Replace("\\\\", "\\");
+            string command = $"C:\\script\\rclone-v1.58.1-windows-amd64\\rclone.exe copy {caminhoArquivo} {directory}";
             ProcessStartInfo processInfo = new ProcessStartInfo("cmd.exe", "/c " + command);
             processInfo.CreateNoWindow = true;
             processInfo.UseShellExecute = false;
@@ -173,16 +170,21 @@ namespace teste01_pegarArquivoBase
 
             Process process = new Process();
             process.StartInfo = processInfo;
+
+            // Pegar o nome do arquivo para poder colocar no StatusMenu.
+            int separaArquivo = (fullPath).LastIndexOf('\\');
+            string nomeDoArquivo = fullPath.Substring(separaArquivo + 1);
+            toolStripStatusLabel1.Text = String.Format("Fazendo UPLOAD do arquivo {0}, AGUARDE!...", nomeDoArquivo);
+
             process.Start();
 
             string output = process.StandardOutput.ReadToEnd();
 
-            string caminho = fullPath;
-            string nomeDoArquivo = Path.GetFileName(caminho);
-
             Thread.Sleep(2000);
 
             geraLinkDrive();
+
+            toolStripStatusLabel1.Text = "FINALIZADO, copie o link ACIMA!...";
         }
 
         private void button_copiarLink_Click(object sender, EventArgs e)

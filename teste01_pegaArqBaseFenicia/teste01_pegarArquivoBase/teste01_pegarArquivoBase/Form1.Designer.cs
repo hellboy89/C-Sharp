@@ -145,7 +145,7 @@
         private ToolStripStatusLabel toolStripStatusLabel_dados;
         private TreeView treeView_diretorios;
         private Button button1;
-        private Button button_download;
+        // private Button button_download;
         private TextBox textBox_linkGdrive;
         private Button button_download2;
         private Button button_copiarLink;
